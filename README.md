@@ -23,12 +23,12 @@ Then build and pass the `FAKETIME` environment variable when doing a `docker run
 
 ### With Java
 
-For example purposes [groovy](https://hub.docker.com/_/groovy/) was used as it is a JVM language that allows us to pass a simple script to run from the command line.  The key thing to note is that the `DONT_FAKE_MONOTONIC=1` environment variable should be set as documented in [libfaketime](https://github.com/wolfcw/libfaketime).
+For example purposes [groovy](https://hub.docker.com/_/groovy/) was used as it is a JVM language that allows us to pass a simple script to run from the command line.  The key thing to note is that the `FAKETIME_DONT_FAKE_MONOTONIC=1` environment variable should be set as documented in [libfaketime](https://github.com/wolfcw/libfaketime).
 
     FROM groovy:alpine
     COPY --from=forchangyao/alpine-libfaketime /faketime.so /lib/faketime.so
     ENV LD_PRELOAD=/lib/faketime.so \
-        DONT_FAKE_MONOTONIC=1
+        FAKETIME_DONT_FAKE_MONOTONIC=1
 
 Then build and pass the `FAKETIME` environment variable when doing a `docker run` for example
 
