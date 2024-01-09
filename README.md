@@ -12,7 +12,7 @@ The `Dockerfile` used to build shows how the image is built and tested.  However
 
 ### With simple command line apps
 
-    FROM alpine
+    FROM alpine:3.18
     COPY --from=forchangyao/alpine-libfaketime /faketime.so /lib/faketime.so
     ENV LD_PRELOAD=/lib/faketime.so
 
@@ -20,6 +20,9 @@ Then build and pass the `FAKETIME` environment variable when doing a `docker run
 
     docker build -f fakedemo.Dockerfile . -t fakedemo
     docker run --rm -e FAKETIME=+15d fakedemo date
+
+    docker build -f fakedemo.Dockerfile . -t fakedemo
+    docker run --rm -e FAKETIME=+1h fakedemo date
 
 ### With Java
 
